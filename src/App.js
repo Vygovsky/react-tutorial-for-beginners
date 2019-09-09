@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import myLogo from './App.css'
 
 
 export class App extends React.Component {
@@ -12,13 +12,18 @@ export class App extends React.Component {
     }
 
     render() {
-        const {buyItem}=this.state;
+        const {buyItem} = this.state;
         return <div>
             <h1>Shopping list</h1>
-            {buyItem.map(item => {
-                    return <p key={item}>{item}</p>
-                }
-            )}
+            <header className={myLogo.test}>
+                <img src={myLogo} alt="logo"/>
+            </header>
+            <div className="container">
+                {buyItem.map(item => {
+                        return <p key={item}>{item}</p>
+                    }
+                )}
+            </div>
         </div>
     }
 }
