@@ -36,12 +36,24 @@ export class App extends React.Component {
     }
 
     removeItem(item) {
-        const newBuyItems = this.state.buyItems.filter(buyItem  => {
+        const newBuyItems = this.state.buyItems.filter(buyItem => {
             return buyItem !== item;
         });
 
         this.setState({
             buyItems: [...newBuyItems]
+        });
+        if (newBuyItems.length === 0) {
+            this.setState({
+                message: 'No items on your list, add items?'
+            });
+        }
+    }
+
+    clearAll() {
+        this.setState({
+            buyItems: [],
+            message: 'No items on your list, add items?'
         })
     }
 
@@ -66,7 +78,7 @@ export class App extends React.Component {
                 </form>
                 <div className="container">
                     {
-                        message !== '' && <p className="message text-danger">{message}</p>
+                        (message !== '' || buyItems.length === 0) && <p className="message text-danger">{message}</p>
                     }
                     <caption className="min-vw-100">Shopping list</caption>
                     <table className="table">
@@ -92,6 +104,14 @@ export class App extends React.Component {
                             }
                         )}
                         </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colSpan="2">&nbsp;</td>
+                            <td className="text-right">
+                                <button onClick={(e) => this.clearAll()} className="btn btn-default btn-sm">Clear list</button>
+                            </td>
+                        </tr>
+                        </tfoot>
                     </table>
 
                 </div>
